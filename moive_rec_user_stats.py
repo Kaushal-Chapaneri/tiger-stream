@@ -5,7 +5,7 @@ import plotly.graph_objects as go
 from utils import connect_tg
 from utils import run_installed_query
 from utils import user_stats_html
-from utils import convert_to_df
+from utils import convert_to_user_stats_df
 from utils import get_genere_df
 
 def user_statistics(user_id):
@@ -18,7 +18,7 @@ def user_statistics(user_id):
 
     query_response = run_installed_query(conn, "UserStatistics", params)
 
-    df = convert_to_df(query_response)
+    df = convert_to_user_stats_df(query_response)
 
     genere_df = get_genere_df(df)
 

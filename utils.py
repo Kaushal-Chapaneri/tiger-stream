@@ -4,6 +4,8 @@ import json
 from bs4 import BeautifulSoup
 import pandas as pd
 from datetime import datetime
+import graphistry
+
 
 @st.cache
 def load_config():
@@ -11,6 +13,7 @@ def load_config():
         config = json.load(f)
         return config
 
+@st.cache(allow_output_mutation=True)
 def connect_tg():
 
     config = load_config()
@@ -26,6 +29,13 @@ def connect_tg():
     token = conn.getToken(TG_SECRET)
 
     return conn
+
+@st.cache
+def connect_graphistry():
+
+    config = load_config()
+
+    graphistry.register(api=3, protocol="https", server="hub.graphistry.com", username=config['GRAPHISTRY_USERNAME'], password=['GRAPHISTRY_PASSWORD'])
 
 @st.cache
 def run_installed_query(conn, query_name, params):
@@ -56,7 +66,7 @@ def user_stats_html(values):
     return str(soup)
 
 @st.cache
-def convert_to_df(result):
+def convert_to_user_stats_df(result):
 
     df = pd.DataFrame.from_dict(result[0]['PRatedMovies'])
 
@@ -76,3 +86,12 @@ def get_genere_df(df):
     df2 = df['genres'].str.get_dummies(sep='|')
 
     return df2
+
+@st.cache
+def convert_to_user_network_df(result, user_id):
+
+    df = pd.DataFrame.from_dict(result[0]['PeopleRatedSameMovies'])
+
+    df['v_type'] = user_id
+
+    return df

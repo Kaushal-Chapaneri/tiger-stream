@@ -1,6 +1,7 @@
 import streamlit as st
 
 from moive_rec_user_stats import user_statistics
+from moive_rec_user_network import find_similar_user
 
 page = st.sidebar.selectbox("Select a page", ["Overview", "Movie Recommnedation"])
 
@@ -12,9 +13,14 @@ elif page == "Movie Recommnedation":
 
     page2 = st.sidebar.selectbox("Select a page", ["User Statistics", "User Network", "Recommendation"])
 
-    user_id = st.sidebar.selectbox("Select a user", [1,2,3,4])
+    user_id = st.sidebar.text_input('Enter User id')
 
-    if page2 == "User Statistics":
+    if user_id:
 
-        user_statistics(user_id)
+        if page2 == "User Statistics":
 
+            user_statistics(user_id)
+
+        if page2 == "User Network":
+
+            find_similar_user(user_id)
