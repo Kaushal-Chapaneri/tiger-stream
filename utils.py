@@ -31,13 +31,6 @@ def connect_tg():
     return conn
 
 @st.cache
-def connect_graphistry():
-
-    config = load_config()
-
-    graphistry.register(api=3, protocol="https", server="hub.graphistry.com", username=config['GRAPHISTRY_USERNAME'], password=['GRAPHISTRY_PASSWORD'])
-
-@st.cache
 def run_installed_query(conn, query_name, params):
 
     result = conn.runInstalledQuery(query_name, params=params)
@@ -45,8 +38,8 @@ def run_installed_query(conn, query_name, params):
     return result
 
 @st.cache
-def load_html():
-    html_file = open("asset/profile_with_data_and_skills.html", 'r', encoding='utf-8')
+def load_html(path):
+    html_file = open(path, 'r', encoding='utf-8')
     html_code = html_file.read() 
 
     return html_code
@@ -54,7 +47,8 @@ def load_html():
 @st.cache
 def user_stats_html(values):
 
-    html_code = load_html()
+    path = "asset/profile_with_data_and_skills.html"
+    html_code = load_html(path)
     soup = BeautifulSoup(html_code, 'html.parser')
     tags = soup.find_all(class_ = 'col-sm-9 text-secondary')
     
@@ -87,11 +81,22 @@ def get_genere_df(df):
 
     return df2
 
-@st.cache
-def convert_to_user_network_df(result, user_id):
+@st.cache(allow_output_mutation=True)
+def convert_to_graphistry_df(result, user_id):
 
     df = pd.DataFrame.from_dict(result[0]['PeopleRatedSameMovies'])
 
     df['v_type'] = user_id
+
+    return df
+
+@st.cache(allow_output_mutation=True)
+def convert_to_pyviz_df(result, user_id):
+
+    df = pd.DataFrame.from_dict(result[0]['PeopleRatedSameMovies'])
+    df['v_type'] = user_id
+    df['movieCount'] = df['attributes'].apply(pd.Series)
+    df['v_type'] = df['v_type'].astype(str)
+    df['movieCount'] = df['movieCount'].astype(str)
 
     return df
