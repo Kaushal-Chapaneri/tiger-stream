@@ -1,9 +1,9 @@
 {
-    "TG_HOST" : "",
-    "TG_USERNAME" : "",
-    "TG_PASSWORD" : "",
-    "TG_GRAPHNAME" : "",
-    "TG_SECRET" : "",
-    "GRAPHISTRY_USERNAME" : "",
-    "GRAPHISTRY_PASSWORD" : ""
+    "TG_HOST" : "https://movieck1.i.tgcloud.io",
+    "TG_USERNAME" : "tigergraph",
+    "TG_PASSWORD" : "skPAV85AWsNa",
+    "TG_GRAPHNAME" : "MyGraph",
+    "TG_SECRET" : "4ee23rcgohs8e6vqpv8pdqbdln8qjj6n",
+    "GRAPHISTRY_USERNAME" : "kaushalchapaneri_graphistry",
+    "GRAPHISTRY_PASSWORD" : "txhQav6xYxFh6vL"
 }

@@ -127,13 +127,13 @@ def convert_to_user_stats_df(result):
     return df
 
 @st.cache
-def get_genere_df(df):
+def get_genre_df(df):
     """
-    function to generate dummies from '|' seperated generes
+    function to generate dummies from '|' seperated genres
 
     input :: dataframe generated from convert_to_user_stats_df function
 
-    output :: dummies dataframe, where 1 and 0 will be present in each genere column for each movie
+    output :: dummies dataframe, where 1 and 0 will be present in each genre column for each movie
     """
 
     df2 = df['genres'].str.get_dummies(sep='|')

@@ -5,18 +5,18 @@ from math import ceil
 from utils import connect_tg
 from utils import run_installed_query
 from utils import convert_to_user_rec_df
-from utils import get_genere_df
+from utils import get_genre_df
 from utils import filter_results
 from utils import download_file
 from utils import adjust_style
 
 def recommended_movies(user_id):
     """
-    Function for Recommendation page, shows recommended movie table and plot of recommende genere count bar plot
+    Function for Recommendation page, shows recommended movie table and plot of recommende genre count bar plot
 
     input :: user id
 
-    output :: table of recommendations with button to save as table as csv and bar plot of genere count
+    output :: table of recommendations with button to save as table as csv and bar plot of genre count
     """
     
     conn = connect_tg()
@@ -66,31 +66,31 @@ def recommended_movies(user_id):
     download_button_str = download_file(df, filename)
     st.markdown(download_button_str, unsafe_allow_html=True)
 
-    genere_df = get_genere_df(df)
+    genre_df = get_genre_df(df)
 
-    genere_stats = genere_df.sum(numeric_only=True, axis=0)
-    genere_index = genere_stats.index.tolist()
-    genere_values = genere_stats.values.tolist()
+    genre_stats = genre_df.sum(numeric_only=True, axis=0)
+    genre_index = genre_stats.index.tolist()
+    genre_values = genre_stats.values.tolist()
 
     st.write("")
-    st.markdown("<b>Recommended generes</b>",unsafe_allow_html=True)
-    colors = ['cornflowerblue',] * len(genere_index)
-    maxval = max(genere_values)
-    ind = [i for i, v in enumerate(genere_values) if v == maxval]
+    st.markdown("<b>Recommended genres</b>",unsafe_allow_html=True)
+    colors = ['cornflowerblue',] * len(genre_index)
+    maxval = max(genre_values)
+    ind = [i for i, v in enumerate(genre_values) if v == maxval]
 
     for i in ind:
         colors[i] = 'green'
         layout = dict(
-            xaxis= dict(title= 'Genere',ticklen= 5,zeroline= False),
+            xaxis= dict(title= 'Genre',ticklen= 5,zeroline= False),
             yaxis= dict(title= 'No. of ratings',ticklen= 5,zeroline= False)
             )
 
     fig = go.Figure(data=[go.Bar(
-            x=genere_index,
-            y=genere_values,
+            x=genre_index,
+            y=genre_values,
             marker_color=colors # marker color can be a single color value or an iterable
         )],layout=layout)
-    fig.update_layout(title_text='Genere wise movie rating count')
+    fig.update_layout(title_text='Genre wise movie rating count')
     st.plotly_chart(fig,use_container_width=True)
 
     href = f"""<a href="#top">Back to top</a>"""
