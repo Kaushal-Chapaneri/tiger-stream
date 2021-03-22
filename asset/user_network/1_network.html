@@ -1,0 +1,80 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 800px;
+            height: 600px;
+            background-color: white;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "#ef4f4f", "font": {"color": "black"}, "id": "1", "label": "1", "shape": "dot", "title": "1\u003cbr\u003eNeighbors: 258, 311, 274, 262, 18"}, {"color": "#74c7b8", "font": {"color": "black"}, "id": "311", "label": "311", "shape": "dot", "title": "311\u003cbr\u003eNeighbors: 1\u003cbr\u003eSimilar movies: 30"}, {"color": "#74c7b8", "font": {"color": "black"}, "id": "274", "label": "274", "shape": "dot", "title": "274\u003cbr\u003eNeighbors: 1\u003cbr\u003eSimilar movies: 2"}, {"color": "#74c7b8", "font": {"color": "black"}, "id": "262", "label": "262", "shape": "dot", "title": "262\u003cbr\u003eNeighbors: 1\u003cbr\u003eSimilar movies: 10"}, {"color": "#74c7b8", "font": {"color": "black"}, "id": "258", "label": "258", "shape": "dot", "title": "258\u003cbr\u003eNeighbors: 1\u003cbr\u003eSimilar movies: 36"}, {"color": "#74c7b8", "font": {"color": "black"}, "id": "18", "label": "18", "shape": "dot", "title": "18\u003cbr\u003eNeighbors: 1\u003cbr\u003eSimilar movies: 8"}]);
+        edges = new vis.DataSet([{"from": "1", "to": "311", "value": "30"}, {"from": "1", "to": "274", "value": "2"}, {"from": "1", "to": "262", "value": "10"}, {"from": "1", "to": "258", "value": "36"}, {"from": "1", "to": "18", "value": "8"}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {"nodes": {"borderWidth": 0, "shadow": {"enabled": true}}, "edges": {"arrows": {"middle": {"enabled": true}}, "color": {"inherit": true}, "smooth": false}, "interaction": {"hideEdgesOnDrag": true, "hover": true, "navigationButtons": true}, "physics": {"enabled": false, "minVelocity": 0.75}};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
