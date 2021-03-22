@@ -1,0 +1,20 @@
+CREATE QUERY SimilarPeople
+(vertex<person> p, int k1) 
+FOR GRAPH MyGraph {   
+  SumAccum<double> @movieCount;
+  ListAccum<string> @movieList;
+  PSet = { p };
+	
+ PRatedMovies =
+    SELECT m
+    FROM PSet -(rate:r)-> movie:m;
+  
+  PeopleRatedSameMovies =
+    SELECT tgt
+    FROM PRatedMovies:m -(reverse_rate:r)-> person:tgt
+    WHERE tgt != p 
+    ACCUM tgt.@movieCount += 1, tgt.@movieList += m.title
+    LIMIT k1;
+  
+  PRINT PeopleRatedSameMovies;
+}

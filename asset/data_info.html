@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+* {
+  box-sizing: border-box;
+}
+  
+.column {
+  float: left;
+  width: 44%;
+  padding: 5px;
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th, td {
+  text-align: left;
+  padding: 16px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+</style>
+</head>
+<body>
+
+<div class="row">
+  <div class="column">
+    <table>
+      <tr>
+        <th>movies.csv</th>
+      </tr>
+      <tr>
+        <td>No. of Movies</td>
+        <td>27278</td>
+
+      </tr>
+      <tr>
+        <td>No. of Generes</td>
+        <td>19</td>
+
+      </tr>
+      <tr>
+        <td>--------</td>
+        <td>--------</td>
+      </tr>
+      <tr>
+        <td>--------</td>
+        <td>--------</td>
+      </tr>
+    </table>
+  </div>
+  <div class="column">
+    <table>
+      <tr>
+        <th>ratings.csv</th>
+      </tr>
+      <tr>
+        <td>No. of ratings</td>
+        <td>20000263</td>
+      </tr>
+      <tr>
+        <td>No. of users</td>
+        <td>138493</td>
+      </tr>
+      <tr>
+        <td>Rating range</td>
+        <td>0.5 to 5.0</td>
+
+      </tr>
+      <tr>
+        <td>Timestamp range</td>
+        <td>1995-09-01 to 2015-12-03</td>
+
+      </tr>
+    </table>
+  </div>
+</div>
+
+</body>
+</html>
+

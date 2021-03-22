@@ -1,0 +1,21 @@
+CREATE QUERY UserStatistics(vertex<person> p) FOR GRAPH MyGraph { 
+  OrAccum @rated;
+  SumAccum<double> @ratingByP;
+  ListAccum<datetime> @timestampOfP;
+  SumAccum<double> @@movieCountOfP;
+  AvgAccum @@ratingAvg;
+  
+  PSet = { p };
+  PRatedMovies =
+    SELECT m
+    FROM PSet -(rate:r)-> movie:m
+    
+    ACCUM m.@rated = true,m.@ratingByP = r.rating,@@ratingAvg += r.rating,       
+  
+    @@movieCountOfP +=1, m.@timestampOfP = r.rated_at;
+  
+  
+  PRINT PRatedMovies;
+  PRINT @@ratingAvg;
+  PRINT @@movieCountOfP;
+}
