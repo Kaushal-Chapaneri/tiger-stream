@@ -1,4 +1,4 @@
-<h1 align="center">Tiger Stream</h1>
+<h1 align="center">TigerStream</h1>
 
 <h2 align="center">
 
