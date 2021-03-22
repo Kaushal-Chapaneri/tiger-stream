@@ -21,12 +21,12 @@ This Web-App is developed for the submission of <b>Build a Web-App with TigerGra
 	- Output : similar movie list and similar movie count of N user's with respect to given user id
 
 - <b>RecommendMovies</b>
-	- Input : user id, no. of similar user, no. of movies to reccomend
-	- Output : list of movies along with their genere and other calculated matrices
+	- Input : user id, no. of similar user, no. of movies to recommend
+	- Output : list of movies along with their genre and other calculated matrices
 
 ## System Configurations
 
-- This Project is Developed and Tested with below mentioned system configurations.
+- This Project is developed and Tested with below mentioned system configurations.
 
 ```
 - Operating System : Ubuntu 18.04 64 bit
@@ -36,12 +36,12 @@ This Web-App is developed for the submission of <b>Build a Web-App with TigerGra
 
 ## Project setup
 
-- Follow below steps to obtain necessary credentials. You can also watch videos of TigerGraph Youtube channel for these steps. 
+- Follow below steps to obtain necessary credentials. You can also watch videos of TigerGraph YouTube channel for these steps. 
 
 ```
 - Login / Register on https://tgcloud.io/
-- Create Solution using Movie Reccomendation starter-kit, follow all default options.
-- Once solution is ready launch GraphStudio and sign in. 
+- Create Solution using Movie Recommendation starter-kit, follow all default options.
+- Once the solution is ready launch GraphStudio and sign in. 
 - Generate secret token by heading to AdminPortal -> User Management
 - Update config.json with tigergraph credentials.
 - Login / Register on https://hub.graphistry.com/
