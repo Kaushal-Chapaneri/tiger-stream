@@ -2,11 +2,11 @@
 
 <h2 align="center">
 
-This Web-App is developed for the submission of <b>'Build a Web-App with TigerGraph using Streamlit & Graphistry'</b> <a style='text-decoration:none' target=_blank href=https://tigergraph-web-app-hack.devpost.com/>Hackathon</a>.
+This Web-App is developed for the submission of <b>Build a Web-App with TigerGraph using Streamlit & Graphistry</b> <a style='text-decoration:none' target=_blank href=https://tigergraph-web-app-hack.devpost.com/>Hackathon</a>.
 
 ## Features
 
-- Integration of TigerGraph database for Movie Reccomendation starter-kit.
+- Integration of TigerGraph database for Movie Recommendation starter-kit.
 - Interactive Web application developed with Streamlit.
 - Grpah visualizations using Graphistry and Pyviz.
 
@@ -36,7 +36,7 @@ This Web-App is developed for the submission of <b>'Build a Web-App with TigerGr
 
 ## Project setup
 
-- Follow below steps to obtain necessary credentials. You can also watch this <a style='text-decoration:none' target=_blank href=https://www.youtube.com/playlist?list=PLq4l3NnrSRp7om_qw4ciNbxslMONszkoX>playlist</a> of TigerGraph for these steps. 
+- Follow below steps to obtain necessary credentials. You can also watch videos of TigerGraph Youtube channel for these steps. 
 
 ```
 - Login / Register on https://tgcloud.io/
@@ -49,7 +49,7 @@ This Web-App is developed for the submission of <b>'Build a Web-App with TigerGr
 ```
 
 - Visit all the pages on the left panel of GraphStudio and execute necessary steps.
-- Copy GSQL queries present under asset/queries folder from this repo then go to Write Queries section in GraphStudio, create new query and paste it.
+- Copy GSQL queries present under asset/queries folder from this repo then go to Write Queries section in GraphStudio, create new query and paste there.
 - Install all the queries in order to use them as API by clicking on Install all queries button.
 
 ## Environment setup
