@@ -94,7 +94,7 @@ def user_stats_html(values):
     output :: html code updated with input values
     """
 
-    path = "asset/profile_with_data_and_skills.html"
+    path = "asset/user_profile.html"
     html_code = load_html(path)
     soup = BeautifulSoup(html_code, 'html.parser')
     tags = soup.find_all(class_ = 'col-sm-9 text-secondary')
