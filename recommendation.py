@@ -1,8 +1,16 @@
+"""
+filename : recommendation.py
+
+Page : Recommendation
+
+This script displays table of recommendation with pagination and download
+option and bar plot of recommended genre plot
+"""
+
 import streamlit as st
 import plotly.graph_objects as go
 from math import ceil
 
-from utils import connect_tg
 from utils import run_installed_query
 from utils import convert_to_user_rec_df
 from utils import get_genre_df
@@ -10,18 +18,21 @@ from utils import filter_results
 from utils import download_file
 from utils import adjust_style
 
-def recommended_movies(user_id):
+
+def recommended_movies(conn, user_id):
     """
-    Function for Recommendation page, shows recommended movie table and plot of recommende genre count bar plot
+    Function for Recommendation page, shows recommended movie table
+    and plot of recommende genre count bar plot
 
-    input :: user id
+    input ::
+        - conn:tigergraph connection object
+        - user id for which plot is generated
 
-    output :: table of recommendations with button to save as table as csv and bar plot of genre count
+    output :: table of recommendations with button to save table as csv
+    and bar plot of genre count
     """
-    
-    conn = connect_tg()
 
-    st.markdown("<b>Recommended Movies</b>",unsafe_allow_html=True)
+    st.markdown("<b>Recommended Movies</b>", unsafe_allow_html=True)
 
     user_num = st.slider("Select Number of User", 5, 100)
 
@@ -38,7 +49,7 @@ def recommended_movies(user_id):
 
     df = convert_to_user_rec_df(query_response)
 
-    df.reset_index(inplace=True,drop=True)
+    df.reset_index(inplace=True, drop=True)
     df.index += 1
 
     # pagination
@@ -57,11 +68,12 @@ def recommended_movies(user_id):
     filter_table = filter_table.to_html(escape=False)
 
     filter_table = adjust_style(filter_table)
-    
+
     st.write(filter_table, unsafe_allow_html=True)
     st.write("")
     st.write("")
 
+    # download button
     filename = str(user_id)+"_recommended_movie.csv"
     download_button_str = download_file(df, filename)
     st.markdown(download_button_str, unsafe_allow_html=True)
@@ -73,25 +85,28 @@ def recommended_movies(user_id):
     genre_values = genre_stats.values.tolist()
 
     st.write("")
-    st.markdown("<b>Recommended genres</b>",unsafe_allow_html=True)
-    colors = ['cornflowerblue',] * len(genre_index)
+    st.markdown("<b>Recommended genres</b>", unsafe_allow_html=True)
+
+    # green bar with max value highlighting
+    colors = ['cornflowerblue'] * len(genre_index)
     maxval = max(genre_values)
     ind = [i for i, v in enumerate(genre_values) if v == maxval]
 
     for i in ind:
         colors[i] = 'green'
         layout = dict(
-            xaxis= dict(title= 'Genre',ticklen= 5,zeroline= False),
-            yaxis= dict(title= 'No. of ratings',ticklen= 5,zeroline= False)
+            xaxis=dict(title='Genre', ticklen=5, zeroline=False),
+            yaxis=dict(title='No. of ratings', ticklen=5, zeroline=False)
             )
 
     fig = go.Figure(data=[go.Bar(
             x=genre_index,
             y=genre_values,
-            marker_color=colors # marker color can be a single color value or an iterable
-        )],layout=layout)
+            marker_color=colors
+        )], layout=layout)
+
     fig.update_layout(title_text='Genre wise movie rating count')
-    st.plotly_chart(fig,use_container_width=True)
+    st.plotly_chart(fig, use_container_width=True)
 
     href = f"""<a href="#top">Back to top</a>"""
-    st.markdown(href,unsafe_allow_html=True)
+    st.markdown(href, unsafe_allow_html=True)

@@ -36,7 +36,7 @@ This Web-App is developed for the submission of <b>Build a Web-App with TigerGra
 
 ## Project setup
 
-- Follow below steps to obtain necessary credentials. You can also watch videos of TigerGraph YouTube channel for these steps. 
+- Follow below steps to obtain necessary credentials. You can also watch videos of TigerGraph on [YouTube](https://www.youtube.com/playlist?list=PLq4l3NnrSRp7om_qw4ciNbxslMONszkoX) for these steps. 
 
 ```
 - Login / Register on https://tgcloud.io/
@@ -61,3 +61,6 @@ This Web-App is developed for the submission of <b>Build a Web-App with TigerGra
 ```
 - streamlit run TigerStream.py
 ```
+
+## Linter
+- [Flake8](https://realpython.com/python-pep8/#linters) extension available in VS Code is used to analyze code and flag errors.
