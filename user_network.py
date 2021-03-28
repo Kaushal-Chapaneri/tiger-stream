@@ -17,6 +17,7 @@ from utils import convert_to_graphistry_df
 from utils import convert_to_pyviz_df
 from utils import load_config
 from utils import load_html
+from utils import tooltip
 
 
 def pyviz_prepare_data(conn, query_response, user_id,
@@ -115,7 +116,7 @@ def pyviz_plot(df, source_vertex, main_vertices, effect):
     net.write_html('asset/user_network/' + str(source_vertex) + '_network.html', notebook=False)
 
 
-def pyviz_similar_user(conn, user_id):
+def pyviz_similar_user(conn, user_id, tooltip_text):
     """
     Function for Graph 1 Page, generates plot using pyviz
 
@@ -126,7 +127,9 @@ def pyviz_similar_user(conn, user_id):
     output :: Similar User network graph plot
     """
 
-    st.markdown("<b>Similar user network visualization</b><br>", unsafe_allow_html=True)
+    st.markdown(tooltip("<b>Similar user network</b>",
+                tooltip_text["similar_user"]),
+                unsafe_allow_html=True)
 
     user_number = st.slider("Select no. of similar users", 5, 10)
 
@@ -157,7 +160,7 @@ def pyviz_similar_user(conn, user_id):
     components.html(html_code, width=900, height=700)
 
 
-def graphistry_similar_user(conn, user_id):
+def graphistry_similar_user(conn, user_id, tooltip_text):
     """
     Function for Graph 2 page in User Network page, \
         Graphistry Visualization function for similar user
@@ -171,7 +174,8 @@ def graphistry_similar_user(conn, user_id):
 
     config = load_config()
 
-    st.markdown("<b>Similar user network visualization with Graphistry</b><br>",
+    st.markdown(tooltip("<b>Similar user network with Graphistry</b><br>",
+                tooltip_text["similar_user_graphistry"]),
                 unsafe_allow_html=True)
 
     user_number = st.slider("Select Number of Similar Users", 5, 10)

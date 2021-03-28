@@ -1,0 +1,8 @@
+{
+    "dataset_info" : "Dataset used in graph database for analysis and recommendation",
+    "genres_rated" : "Donut plot of genre wise percentage rating",
+    "movies_above_4" : "Bar plot of genre rated above 4",
+    "similar_user" : "Network graph using pyviz shows similar user of input user and movie counts",
+    "similar_user_graphistry" : "Network graph using Graphistry shows similar user of input user and movie counts",
+    "recommendation" : "Movies that user has not watched and might like it"
+}

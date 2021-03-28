@@ -58,14 +58,16 @@ def load_html(path):
     return html_code
 
 
-def show_data_info():
+def show_data_info(tooltip_text):
     """
     This function displays information on Movie Recommnedation page
     located in root navidation, data stats is shown from statics html page
     and data sample is loaded from asset folder.
     """
 
-    st.markdown("<b>Dataset Information</b>", unsafe_allow_html=True)
+    st.markdown(tooltip("<b>Dataset Information</b>",
+                        tooltip_text["dataset_info"]),
+                unsafe_allow_html=True)
 
     html_code = load_html('asset/data_info.html')
     components.html(html_code, width=995, height=300, scrolling=False)
@@ -333,3 +335,62 @@ def adjust_style(table):
     result = "<html><head>"+style+"</head><body>"+table+"</body></html>"
 
     return result
+
+
+@st.cache
+def load_tooltip_text():
+    """
+    Function loads tooltip file which contains text to display on hover
+
+    returns :: dictionary of tooltip
+    """
+
+    with open('tooltip_text.json') as f:
+        tooltip_text = json.load(f)
+        return tooltip_text
+
+
+def tooltip(title, tip):
+    """
+    Function to show toolotip on hover.
+
+    input ::
+        - title : text on which tooltip will be displayed.
+        - tip : text that will be visible on hover
+
+    output :: html code with title and tooltip value
+    """
+
+    html = """
+    <style>
+    .tooltip {{
+    position: relative;
+    display: inline-block;
+
+    }}
+    .tooltip .tooltiptext {{
+    visibility: hidden;
+    width: 200%;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -80px;
+    font-size: 13px;
+    font-weight: bold;
+    }}
+    .tooltip:hover .tooltiptext {{
+    visibility: visible;
+    }}
+
+    </style>
+
+    <div class="tooltip"><h3>{}</h3>
+    <span class="tooltiptext">{}</span>
+    </div> """
+    return html.format(title, tip)

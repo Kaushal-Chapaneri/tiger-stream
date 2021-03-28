@@ -17,9 +17,10 @@ from utils import get_genre_df
 from utils import filter_results
 from utils import download_file
 from utils import adjust_style
+from utils import tooltip
 
 
-def recommended_movies(conn, user_id):
+def recommended_movies(conn, user_id, tooltip_text):
     """
     Function for Recommendation page, shows recommended movie table
     and plot of recommende genre count bar plot
@@ -32,7 +33,9 @@ def recommended_movies(conn, user_id):
     and bar plot of genre count
     """
 
-    st.markdown("<b>Recommended Movies</b>", unsafe_allow_html=True)
+    st.markdown(tooltip("<b>Recommended Movies</b>",
+                        tooltip_text["recommendation"]),
+                unsafe_allow_html=True)
 
     user_num = st.slider("Select Number of User", 5, 100)
 

@@ -18,13 +18,14 @@ from recommendation import recommended_movies
 from utils import header
 from utils import connect_tg
 from utils import show_data_info
+from utils import load_tooltip_text
+
+header()
 
 page = st.sidebar.selectbox("Select a page",
                             ["Overview", "Movie Recommnedation"])
 
 if page == "Overview":
-
-    header()
 
     st.write("")
     st.write("")
@@ -42,9 +43,8 @@ if page == "Overview":
 
 elif page == "Movie Recommnedation":
 
-    header()
-
     user_id = st.sidebar.text_input('Enter User id')
+    tooltip_text = load_tooltip_text()
 
     try:
         if user_id:
@@ -54,21 +54,21 @@ elif page == "Movie Recommnedation":
                                           "User Network", "Recommendation"])
 
             if page2 == "User Statistics":
-                user_stats(conn, user_id)
+                user_stats(conn, user_id, tooltip_text)
 
             elif page2 == "User Network":
                 page3 = st.sidebar.selectbox("Select a graph",
                                              ["Graph 1", "Graph 2"])
 
                 if page3 == "Graph 1":
-                    pyviz_similar_user(conn, user_id)
+                    pyviz_similar_user(conn, user_id, tooltip_text)
 
                 else:
-                    graphistry_similar_user(conn, user_id)
+                    graphistry_similar_user(conn, user_id, tooltip_text)
             else:
-                recommended_movies(conn, user_id)
+                recommended_movies(conn, user_id, tooltip_text)
         else:
-            show_data_info()
+            show_data_info(tooltip_text)
 
     except Exception as e:
 

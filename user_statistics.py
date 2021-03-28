@@ -15,9 +15,10 @@ from utils import run_installed_query
 from utils import user_stats_html
 from utils import convert_to_user_stats_df
 from utils import get_genre_df
+from utils import tooltip
 
 
-def user_stats(conn, user_id):
+def user_stats(conn, user_id, tooltip_text):
     """
     Function for User Statistics page, \
         fetches user information and generates plots
@@ -52,7 +53,10 @@ def user_stats(conn, user_id):
     html_code = user_stats_html(update_values)
     components.html(html_code, width=995, height=400, scrolling=False)
 
-    st.markdown("<b>Genres user has rated</b>", unsafe_allow_html=True)
+    tooltip_html = tooltip("<b>Genres rated</b>",
+                           tooltip_text["genres_rated"])
+
+    st.markdown(tooltip_html, unsafe_allow_html=True)
 
     # code for donut plot
     labels = genre_index
@@ -68,7 +72,9 @@ def user_stats(conn, user_id):
     fig.update_layout(title_text='Genre wise rating')
     st.plotly_chart(fig, use_container_width=True)
 
-    st.markdown("<b>Movies user has rated above 4</b>", unsafe_allow_html=True)
+    st.markdown(tooltip("<b>Movies rated above 4</b>",
+                tooltip_text["movies_above_4"]),
+                unsafe_allow_html=True)
 
     df_4 = df[df['@ratingByP'] >= 4]
     genre_df_4 = df_4['genres'].str.get_dummies(sep='|')
