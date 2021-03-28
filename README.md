@@ -24,6 +24,14 @@ This Web-App is developed for the submission of <b>Build a Web-App with TigerGra
 	- Input : user id, no. of similar user, no. of movies to recommend
 	- Output : list of movies along with their genre and other calculated matrices
 
+## Streamlit features in action
+
+- Multiple Page navigation
+- Components feature for displaying html files and iframe
+- Beta columns for side-by-side elements
+- Plotly integration for interactive visualization
+- <b>(New)</b> Tooltip on Hover 
+
 ## System Configurations
 
 - This Project is developed and Tested with below mentioned system configurations.
