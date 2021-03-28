@@ -10,6 +10,8 @@ option and bar plot of recommended genre plot
 import streamlit as st
 import plotly.graph_objects as go
 from math import ceil
+import graphistry
+import streamlit.components.v1 as components
 
 from utils import run_installed_query
 from utils import convert_to_user_rec_df
@@ -18,6 +20,7 @@ from utils import filter_results
 from utils import download_file
 from utils import adjust_style
 from utils import tooltip
+from utils import load_config
 
 
 def recommended_movies(conn, user_id, tooltip_text):
@@ -32,16 +35,16 @@ def recommended_movies(conn, user_id, tooltip_text):
     output :: table of recommendations with button to save table as csv
     and bar plot of genre count
     """
-
-    st.markdown(tooltip("<b>Recommended Movies</b>",
-                        tooltip_text["recommendation"]),
-                unsafe_allow_html=True)
+    config = load_config()
 
     user_num = st.slider("Select Number of User", 5, 100)
 
     similar_movies = st.slider("Select Number of Similar Movies", 5, 100)
 
     st.write("")
+    st.markdown(tooltip("<b>Recommended Movies</b>",
+                        tooltip_text["recommendation"]),
+                unsafe_allow_html=True)
 
     params = dict()
     params['p'] = user_id
@@ -110,6 +113,19 @@ def recommended_movies(conn, user_id, tooltip_text):
 
     fig.update_layout(title_text='Genre wise movie rating count')
     st.plotly_chart(fig, use_container_width=True)
+
+    st.write("")
+
+    graphistry.register(api=3, protocol="https",
+                        server="hub.graphistry.com",
+                        username=config['GRAPHISTRY_USERNAME'],
+                        password=config['GRAPHISTRY_PASSWORD'])
+
+    g = graphistry.bind(source="title", destination="genres")
+
+    iframe_url = g.edges(df).plot(render=False)
+
+    components.iframe(iframe_url, width=800, height=600, scrolling=False)
 
     href = f"""<a href="#top">Back to top</a>"""
     st.markdown(href, unsafe_allow_html=True)
