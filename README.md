@@ -27,10 +27,11 @@ This Web-App is developed for the submission of <b>Build a Web-App with TigerGra
 ## Streamlit features in action
 
 - Multiple Page navigation
-- Components feature for displaying html files and iframe
+- Components for displaying saved html files and iframe
 - Beta columns for side-by-side elements
 - Plotly integration for interactive visualization
-- <b>(New)</b> Tooltip on Hover 
+- DataFrame Pagination
+- Tooltip on Hover 
 
 ## System Configurations
 
