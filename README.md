@@ -8,7 +8,7 @@ This Web-App is developed for the submission of <b>Build a Web-App with TigerGra
 
 - Integration of TigerGraph database for Movie Recommendation starter-kit.
 - Interactive Web application developed with Streamlit.
-- Grpah visualizations using Graphistry and Pyviz.
+- Graph visualizations using Graphistry and Pyviz.
 
 ## Installed GSQL queries
 
@@ -73,3 +73,6 @@ This Web-App is developed for the submission of <b>Build a Web-App with TigerGra
 
 ## Linter
 - [Flake8](https://realpython.com/python-pep8/#linters) extension available in VS Code is used to analyze code and flag errors.
+
+## Demo
+- Watch demo of this application on [YouTube](https://www.youtube.com/watch?v=lBdxM13H16Y).
